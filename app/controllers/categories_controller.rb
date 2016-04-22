@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-byebug
+
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
@@ -59,6 +59,17 @@ byebug
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def announce
+    @category = Category.find(params[:idcategory])
+    @subcategory = ''
+    @title = @category.name;
+    if params[:idsubcategory] != '-1'
+      @subcategory = Subcategory.find(params[:idsubcategory])
+      @title += '/'+@subcategory.name;
+    end
+
   end
 
   private

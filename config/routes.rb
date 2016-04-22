@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'announces#index'
+  root 'welcome#index'
+  get 'categories/:idcategory/:idsubcategory/announce' => 'categories#announce', :as=>'categories_announce'
   resources :announces
   resources :categories do
       resources :subcategories

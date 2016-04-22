@@ -17,6 +17,7 @@ en:
       new: "New"
       edit: "Edit"
       show: "Show"
+      new_annoince: "New Annoince"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

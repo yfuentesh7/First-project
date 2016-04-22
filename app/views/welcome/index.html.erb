@@ -1,0 +1,18 @@
+<%= link_to t('.new_annoince', :default => t("helpers.links.new_annoince")),
+            new_announce_path,
+            :class => 'btn btn-primary' %>
+<h2>Select Category</h2>
+<ul>
+    <% @categories.each do |category| %>
+          <li>
+            <%= link_to category.name, categories_announce_path(category, -1) %>
+          </li>
+
+          <ul>
+             <% category.subcategories.each do |subcategory| %>
+                <li><%= link_to subcategory.name, categories_announce_path(category, subcategory) %></li>
+             <% end %>
+          </ul>
+
+    <% end %>
+</ul>
