@@ -1,0 +1,9 @@
+<p>
+  <strong>Name:</strong>
+  <%= subcategory.name %>
+</p>
+<p>
+  <%= link_to 'Destroy Subcategory', [subcategory.category, subcategory],
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+</p>
