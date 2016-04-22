@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'announces#index'
+  resources :announces
   resources :categories do
       resources :subcategories
   end
