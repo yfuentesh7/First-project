@@ -69,6 +69,6 @@ class AnnouncesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def announce_params
-      params.require(:announce).permit(:price, :title, :description, :email, :name, :phone)
+      params.require(:announce).permit(:price, :title, :description, :email, :name, :phone, :avatar)
     end
 end
