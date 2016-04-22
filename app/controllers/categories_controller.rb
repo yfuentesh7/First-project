@@ -62,13 +62,44 @@ class CategoriesController < ApplicationController
   end
 
   def announce
-    @category = Category.find(params[:idcategory])
-    @subcategory = ''
-    @title = @category.name;
+    text = params[:text]==nil ? "":params[:text]
+    pi = (params[:price_s]==nil || params[:price_s]=="") ? 0:params[:price_s]
+    pe = (params[:price_e]==nil || params[:price_s]=="") ? 9999999999:params[:price_e]
+
+    @idcategory = params[:idcategory]
+    @idsubcategory = -1;
+    category = Category.find(params[:idcategory])
+    subcategory = ''
+    @anounce = [];
+    @title = category.name
     if params[:idsubcategory] != '-1'
-      @subcategory = Subcategory.find(params[:idsubcategory])
-      @title += '/'+@subcategory.name;
+      subcategory = Subcategory.find(params[:idsubcategory])
+      @idsubcategory = params[:idsubcategory]
+      @title += '/'+subcategory.name;
+      anounceAll = Announce.where(:subcategory_id => subcategory.id)
+      anounceAll.each do |a|
+        if a.subcategory.category.id == params[:idcategory].to_i
+          if (a.title.include? text) && pi.to_f<=a.price.to_f || pe.to_f>=a.price.to_f
+            @anounce <<  a
+            end
+        end
+      end
+    else
+      anounceAll = Announce.all;
+       anounceAll.each do |a|
+        if a.subcategory.category.id == params[:idcategory].to_i
+          if (a.title.include? text) && pi.to_f<=a.price.to_f || pe.to_f>=a.price.to_f
+          @anounce <<  a
+          end
+        end
+      end
     end
+  end
+
+  def get_subcategories
+    @category = Category.find(params[:id])
+    @subcategory = @category.subcategories.all.collect{|category| [category.name, category.id]}
+    render :json => @subcategory
 
   end
 
