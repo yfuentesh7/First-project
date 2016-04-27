@@ -47,4 +47,5 @@ end
 
 gem 'twitter-bootstrap-rails'
 gem 'paperclip'
+gem 'redcarpet'
 

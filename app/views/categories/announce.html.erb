@@ -1,3 +1,18 @@
 <h2>
   <%= @title %>
 </h2>
+<form action="<%=categories_announce_post_path(@idcategory, @idsubcategory)%>">
+<input type ="text" placeholder="Text" id="text" name="text"/>
+<input type ="text" placeholder="Price start" id="price_s" name="price_s"/>
+<label>to</label>
+<input type ="text" id="price_e" placeholder="Price end" name="price_e"/>
+<input type ="submit" id="search" value="Search"/>
+<div>
+  <% @anounce.each do |a| %>
+      <div>
+        <% title = a.price.to_s + '---' + a.title %>
+        <%= link_to  title, announce_path(a) %>
+      </div>
+  <% end %>
+</div>
+</form>

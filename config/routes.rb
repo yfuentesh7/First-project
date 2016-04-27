@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  get 'announces/categories/get_subcategories/:id' => 'categories#get_subcategories'
+  post 'categories/announces_search' => 'announces#announces_search'
   get 'categories/:idcategory/:idsubcategory/announce' => 'categories#announce', :as=>'categories_announce'
+  post 'categories/:idcategory/:idsubcategory/announce' => 'categories#announce', :as=>'categories_announce_post'
   resources :announces
   resources :categories do
       resources :subcategories
